@@ -61,40 +61,36 @@ class AnyPath:
 
     @property
     def suffix(self):
-        if self.is_dir:
-            raise ValueError("This object appears to be a directory.")
         if self.components[-1].find(".") > -1:
             return self.components[-1].split(".")[-1]
         return None
 
 
 a = AnyPath("/home/files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath("http://home//files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath("s3://home/files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath("home/files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath(r"C:\home\files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath(r"home\files.jpg")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath(r"/home/files")
-print(str(a), a.suffix, a.is_root)
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 a = AnyPath(r"/home/files/")
-print(str(a))
+print(str(a), a.suffix, a.is_root, a.is_dir)
 
 b = AnyPath(r"some/more/folders/pic.jpg")
-print(a + b)
-print(a / b)
-
-c = sum([a, b, a, b])
-print(c)
+print("Summating: ", a + b)
+print("Summation by path slash: ", a / b)
+print("Sum method: ", sum([a, b, a, b]))
