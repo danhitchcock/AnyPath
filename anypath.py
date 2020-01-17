@@ -1,5 +1,6 @@
 import re
 import copy
+from cached_property import cached_property
 
 
 class AnyPath:
@@ -59,7 +60,7 @@ class AnyPath:
     def __truediv__(self, other):
         return self + other
 
-    @property
+    @cached_property
     def suffix(self):
         if self.components[-1].find(".") > -1:
             return self.components[-1].split(".")[-1]
