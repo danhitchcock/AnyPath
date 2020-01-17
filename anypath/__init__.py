@@ -47,6 +47,8 @@ class AnyPath:
         return pathstr
 
     def __add__(self, other):
+        if isinstance(other, str):
+            other = type(self)(other)
         a = copy.deepcopy(self)
         a.components += other.components
         a.is_dir = other.is_dir
@@ -63,7 +65,7 @@ class AnyPath:
     def __fspath__(self):
         return str(self)
 
-    @cached_property
+    @property
     def suffix(self):
         if self.components[-1].find(".") > -1:
             return self.components[-1].split(".")[-1]
